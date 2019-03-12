@@ -14,7 +14,7 @@ Bir grup gencin üniversite için geliştirdiği garip proje.
 ##### 2. Week
 - Back-End development
 
-## :family: Team & Task Distribution :family:
+## :sunglasses: Team & Task Distribution :sunglasses:
 - Ferhat BOSTANCI :hamster: @ferhatbostanci | Back-End Developer
 - İrem KÖPREK :hatching_chick: @iremkoprek | Database Designer
 - Hasan DEMİRELLİ :monkey_face: @hasandemirelli | Front-End Developer
