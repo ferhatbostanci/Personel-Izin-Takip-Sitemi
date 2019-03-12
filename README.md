@@ -7,17 +7,14 @@ Bir grup gencin üniversite için geliştirdiği garip proje.
 
 ## :walking: Step Step :walking:
 
-:pushpin: Project start date:
-12.03.2019
-
-##### 1. Week
+##### 1. Week (18.03.2018)
 - Database relationship
 - Basic front-end design
 
-##### 2. Week
+##### 2. Week (25.03.2018)
 - Back-End development
 
-##### 3. Week
+##### 3. Week (01.04.2018)
 - 
 
 ## Team & Task Distribution
