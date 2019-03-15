@@ -1,4 +1,4 @@
-# ALKU Holiday Tracking Project :calendar::restroom:
+# ALKU Day Off Tracking Project :calendar::restroom:
 
 ```
 Bir grup gencin üniversite için geliştirdiği garip proje.
