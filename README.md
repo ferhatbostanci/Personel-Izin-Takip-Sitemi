@@ -1,10 +1,9 @@
 # ALKU Holiday Tracking Project :calendar::restroom:
 
-```
-Bir grup gencin üniversite için geliştirdiği garip proje.
-Demo IP: http://134.209.239.61
-```
 
+Bir grup gencin üniversite için geliştirdiği garip proje.
+
+[Demo Site](http://134.209.239.61)
 
 ## :walking: Step Step :walking:
 
