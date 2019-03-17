@@ -8,11 +8,11 @@
     <title><?= $data['title'] ?></title>
 
     <meta name="author" content="Ferhat B.">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="noindex, nofollow">
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="<?= URLROOT ?>/media/favicons/favicon.png">
+    <link rel="shortcut icon" href="<?= URLROOT ?>/images/favicons/favicon.png">
     <!-- END Icons -->
 
     <!-- Stylesheets -->
