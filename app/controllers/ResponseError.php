@@ -4,7 +4,7 @@ class ResponseError extends Controller {
 
     public function error404(){
         $data = [
-            'title' => '404'
+            'title' => 'Ooops!'
         ];
 
         $this->view('404', $data);
