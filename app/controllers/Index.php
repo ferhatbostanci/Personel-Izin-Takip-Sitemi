@@ -7,8 +7,13 @@ class Index extends Controller {
     }
 
     public function index(){
+        if(!isLoggedIn()){
+            redirect('users/login');
+            exit;
+        }
+
         $data = [
-            'title' => 'Test Title'
+            'title' => SITENAME
         ];
 
         $this->view('index', $data);

@@ -13,11 +13,12 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://holiday.local');
 
 // Site Name
-define('SITENAME', 'ALKÜ - İzin Takip Sistemi');
+define('SITENAME', 'ALKÜ Personel İzin Takip Sistemi');
 
 // Page List
 define('PAGELIST', [
     '/',
+    'users/login',
 ]);
 
 
