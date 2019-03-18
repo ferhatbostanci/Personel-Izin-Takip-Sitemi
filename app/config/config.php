@@ -19,6 +19,7 @@ define('SITENAME', 'ALKÜ Personel İzin Takip Sistemi');
 define('PAGELIST', [
     '/',
     'users/login',
+    'users/register',
 ]);
 
 

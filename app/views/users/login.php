@@ -18,6 +18,9 @@
                                         <h3 class="block-title">Giriş Yap</h3>
                                         <div class="block-options">
                                             <a class="btn-block-option font-size-sm" href="#">Parolamı unuttum?</a>
+                                            <a class="btn-block-option js-tooltip-enabled" href="<?= URLROOT ?>/users/register" data-toggle="tooltip" data-placement="left" title="" data-original-title="Kayıt Ol">
+                                                <i class="fa fa-user-plus"></i>
+                                            </a>
                                         </div>
                                     </div>
 
@@ -28,10 +31,13 @@
                                             <p>Hoşgeldiniz, lütfen giriş yapınız.</p>
 
                                             <!-- Sign In Form -->
-                                            <form class="js-validation-signin" action="" method="POST" onsubmit="return sendForm(this)">
+                                            <form class="js-validation-signin" action="" method="POST">
                                                 <div class="py-3">
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control form-control-alt form-control-lg" id="email" name="email" placeholder="Üniversite E-Posta Adresiniz" required>
+                                                        <input type="email" class="form-control form-control-alt form-control-lg" id="email" name="email" placeholder="Üniversite E-Posta Adresiniz" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control form-control-lg form-control-alt" id="password" name="password" placeholder="Parolanız" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -62,19 +68,17 @@
     </div>
 
     <script>
-        function sendForm(frm) {
-            var email = frm.email.value;
-            if(email.indexOf("@alanya.edu.tr") > 0 && email.substring(email.indexOf('@'), email.lenght) == "@alanya.edu.tr"){
-                return true;
-            }else{
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if(<?= isset($data['sweet']) ? 1 : 0 ?>){
                 Swal.fire({
-                    type: 'warning',
-                    title: 'Dikkat',
-                    text: 'Lütfen üniversite e-posta adresinizi giriniz!',
+                    type: "<?= $data['sweet']['type'] ?>",
+                    title: "<?= $data['sweet']['title'] ?>",
+                    text: "<?= $data['sweet']['text'] ?>",
                 });
-                return false;
             }
-        }
+        }, false);
+
     </script>
 
 <?php require APPROOT . '/views/inc/footer.php' ?>
