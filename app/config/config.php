@@ -20,6 +20,7 @@ define('PAGELIST', [
     '/',
     'users/login',
     'users/register',
+    'users/activation',
 ]);
 
 

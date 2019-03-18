@@ -53,4 +53,51 @@ class User {
         }
     }
 
+    public function isUserActive($email){
+        $this->db->query('SELECT * FROM users WHERE email = :email LIMIT 1');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if($row->active){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function isUserCodeEquals($email, $code){
+        $this->db->query('SELECT * FROM users WHERE email = :email LIMIT 1');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if($row->activation_code == $code){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    /*
+    * Update functions
+    */
+
+    public function userActivation($email){
+        $this->db->query('UPDATE users SET active = :active, activation_code = :activation_code WHERE email = :email');
+        $this->db->bind(':active', 1);
+        $this->db->bind(':activation_code', NULL);
+        $this->db->bind(':email', $email);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

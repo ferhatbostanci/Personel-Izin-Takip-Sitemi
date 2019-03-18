@@ -28,7 +28,7 @@ class Mail {
         $mail->setFrom('ts3adresim@gmail.com', 'Teamspeak Adresim');
         $mail->addAddress($sendaddress);
         $mail->Subject = 'ALKÜ Personel İzin Takip Sistemi - Aktivasyon Kodu';
-        $mail->msgHTML('Aktivasyon kodunuz: <b>'.$activationcode.'</b>');
+        $mail->msgHTML('Hesabınızı aktif etmek için lütfen aşağıdaki linke tıklayınız.<br><br><a href="'.URLROOT.'/users/activation?email='.$sendaddress.'&code='.$activationcode.'" target="_blank"><b>Aktivasyonu Onayla</b></a><br>');
         if(!$mail->send()){
             //echo "Mailer Error: " . $mail->ErrorInfo;
             return false;
