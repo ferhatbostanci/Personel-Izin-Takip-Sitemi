@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql:host=localhost',
+	'hostname' => 'mysql:host=134.209.239.61',
 	'username' => 'root',
-	'password' => '',
-	'database' => 'alku_holiday',
+	'password' => 'ALKUHoliday07.',
+	'database' => 'HolidayDB',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
