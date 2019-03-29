@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql:host=134.209.239.61',
+	'hostname' => 'mysql:host=134.209.239.61;dbname=HolidayDB',
 	'username' => 'root',
 	'password' => 'ALKUHoliday07.',
 	'database' => 'HolidayDB',

@@ -7,7 +7,7 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('home/index');
 
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
 	}
 
 }
