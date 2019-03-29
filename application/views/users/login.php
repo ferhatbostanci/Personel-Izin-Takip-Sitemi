@@ -39,9 +39,10 @@
                                                         </span>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="password" class="form-control form-control-lg form-control-alt <?= form_error('password') ? 'is-invalid' : '' ?>" name="password" placeholder="Parolanız" value="<?= set_value('password') ?>" required>
+                                                        <input type="password" class="form-control form-control-lg form-control-alt <?= form_error('password') || $this->session->flashdata('password_error') ? 'is-invalid' : '' ?>" name="password" placeholder="Parolanız" value="<?= set_value('password') ?>" required>
                                                         <span class="invalid-feedback" style="display: unset;">
                                                             <?= form_error('password') ?>
+                                                            <?= $this->session->flashdata('password_error') ?>
                                                         </span>
                                                     </div>
                                                 </div>

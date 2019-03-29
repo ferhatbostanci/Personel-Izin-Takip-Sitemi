@@ -5,6 +5,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+
 		$this->load->view('home/index');
 
         //$this->output->enable_profiler(TRUE);

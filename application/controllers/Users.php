@@ -12,6 +12,10 @@ class Users extends CI_Controller {
     public function login()
     {
 
+        if($this->session->userdata('logged_in')){
+            redirect(base_url());
+        }
+
         $data = ['title' => 'Giriş Yap'];
         $this->load->view('users/login', $data);
 
@@ -20,8 +24,30 @@ class Users extends CI_Controller {
     public function register()
     {
 
+        if($this->session->userdata('logged_in')){
+            redirect(base_url());
+        }
+
         $data = ['title' => 'Kayıt Ol'];
         $this->load->view('users/register', $data);
+
+    }
+
+    public function logout()
+    {
+
+        $user_data = array(
+            'user_id',
+            'user_name',
+            'user_surname',
+            'user_email',
+            'logged_in'
+        );
+
+        foreach($user_data as $data){
+            $this->session->unset_userdata($data);
+        }
+        redirect('users/login');
 
     }
 
@@ -43,7 +69,6 @@ class Users extends CI_Controller {
                     'type' => 'info'
                 )
             );
-            redirect('users/login');
         }else{
             if($this->user_model->activeUser($this->input->get('email'), $this->input->get('code'))){
                 $this->session->set_flashdata('activation_message',
@@ -53,7 +78,6 @@ class Users extends CI_Controller {
                         'type' => 'success'
                     )
                 );
-                redirect('users/login');
             }else{
                 $this->session->set_flashdata('activation_message',
                     array(
@@ -62,10 +86,10 @@ class Users extends CI_Controller {
                         'type' => 'error'
                     )
                 );
-                redirect('users/login');
             }
-
         }
+
+        redirect('users/login');
 
     }
 
@@ -81,11 +105,11 @@ class Users extends CI_Controller {
             array(
                 'field' => 'email',
                 'label' => 'E-Posta',
-                'rules' => 'trim|required|valid_email',
+                'rules' => 'trim|required|valid_email|callback_check_email',
                 'errors' => array(
                     'required' => '%s adresi boş bırakılamaz.',
                     'valid_email' => 'Geçerli bir %s adresi giriniz.'
-                )
+                ),
             ),
             array(
                 'field' => 'password',
@@ -100,12 +124,27 @@ class Users extends CI_Controller {
 
         if($this->form_validation->run() == TRUE){
 
+            $loginData = $this->user_model->login($this->input->post('email'), $this->input->post('password'));
 
+            if($loginData){
+                $user_data = array(
+                    'user_id' => $loginData->id,
+                    'user_name' => $loginData->name,
+                    'user_surname' => $loginData->surname,
+                    'user_email' => $loginData->email,
+                    'logged_in' => true
+                );
 
-        }else{
-            $data = ['title' => 'Hata!'];
-            $this->load->view('users/login', $data);
+                $this->session->set_userdata($user_data);
+                redirect(base_url());
+            }else{
+                $this->session->set_flashdata('password_error', 'Parola hatalı');
+            }
+
         }
+
+        $data = ['title' => 'Giriş Yap'];
+        $this->load->view('users/login', $data);
 
     }
 
@@ -171,33 +210,43 @@ class Users extends CI_Controller {
             $password_hash = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
             $activation_code = md5(uniqid(mt_rand(), true));
 
-            $isRegistered = $this->user_model->register($password_hash, $activation_code);
-            $this->user_model->sendEmailVerification($this->input->post('email'), $activation_code);
+            $this->user_model->register($password_hash, $activation_code);
+            $this->user_model->sendEmailActivation($this->input->post('email'), $activation_code);
 
-            if($isRegistered){
-                $this->session->set_flashdata('register_message',
-                    array(
-                        'title' => 'Kayıt Tamamlandı!',
-                        'text' => 'E-Posta adresinize gönderilen aktivasyon linkinden hesabınızı aktif edebilirsiniz.',
-                        'type' => 'success'
-                    )
-                );
-                redirect(current_url());
-            }else{
-                $this->session->set_flashdata('register_message',
-                    array(
-                        'title' => 'Kayıt Başarısız!',
-                        'text' => 'Kayıt işlemi sırasında hata oluştu! Lütfen sistem yöneticilerine başvurunuz.',
-                        'type' => 'error'
-                    )
-                );
-            }
+            $this->session->set_flashdata('register_message',
+                array(
+                    'title' => 'Kayıt Tamamlandı!',
+                    'text' => 'E-Posta adresinize gönderilen aktivasyon linkinden hesabınızı aktif edebilirsiniz.',
+                    'type' => 'success'
+                )
+            );
+            redirect(current_url());
 
         }
 
         $data = ['title' => 'Kayıt Ol'];
         $this->load->view('users/register', $data);
 
+    }
+
+
+    /*
+     * Check
+     */
+
+    public function check_email($email)
+    {
+        if($this->user_model->isUser($email)){
+            if($this->user_model->isUserActive($email)){
+                return TRUE;
+            }else{
+                $this->form_validation->set_message('check_email', 'Hesap aktivasyonu yapılmamış');
+                return FALSE;
+            }
+        }else{
+            $this->form_validation->set_message('check_email', 'E-Posta adresi bulunamadı');
+            return FALSE;
+        }
     }
 
 }

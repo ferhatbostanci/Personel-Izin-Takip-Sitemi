@@ -2,6 +2,35 @@
 
 class User_model extends CI_Model {
 
+    /*
+     * GET
+     */
+
+    public function login($email, $password){
+        $this->db->where('email', $this->input->post('email'));
+        $result = $this->db->get('users')->row();
+        if(password_verify($password, $result->password)){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function isUser($email){
+        $this->db->where('email', $email);
+        return $this->db->get('users')->row();
+    }
+
+    public function isUserActive($email){
+        $this->db->where(array('email' => $email, 'active' => 1));
+        return $this->db->get('users')->row();
+    }
+
+
+    /*
+     * Insert
+     */
+
     public function register($password_hash, $activation_code){
         $data = array(
             'name' => $this->input->post('name'),
@@ -13,6 +42,11 @@ class User_model extends CI_Model {
         );
         return $this->db->insert('users',$data);
     }
+
+
+    /*
+     * Update
+     */
 
     public function activeUser($email, $activation_code){
 
@@ -29,12 +63,12 @@ class User_model extends CI_Model {
 
     }
 
-    public function isUserActive($email){
-        $this->db->where(array('email' => $email, 'active' => 1));
-        return $this->db->get('users')->row();
-    }
 
-    public function sendEmailVerification($email, $activationcode){
+    /*
+     * Others
+     */
+
+    public function sendEmailActivation($email, $activationcode){
         $from = "ts3adresim@gmail.com";
         $subject = 'ALKÜ Personel İzin Takip Sistemi - Aktivasyon Kodu';
 
