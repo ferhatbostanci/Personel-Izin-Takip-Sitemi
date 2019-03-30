@@ -12,9 +12,7 @@ class Users extends CI_Controller {
     public function login()
     {
 
-        if($this->session->userdata('logged_in')){
-            redirect(base_url());
-        }
+        if($this->session->userdata('logged_in')) redirect(base_url());
 
         $data = ['title' => 'Giriş Yap'];
         $this->load->view('users/login', $data);
@@ -24,9 +22,7 @@ class Users extends CI_Controller {
     public function register()
     {
 
-        if($this->session->userdata('logged_in')){
-            redirect(base_url());
-        }
+        if($this->session->userdata('logged_in')) redirect(base_url());
 
         $data = ['title' => 'Kayıt Ol'];
         $this->load->view('users/register', $data);
@@ -36,14 +32,7 @@ class Users extends CI_Controller {
     public function logout()
     {
 
-        $user_data = array(
-            'user_id',
-            'user_name',
-            'user_surname',
-            'user_email',
-            'logged_in'
-        );
-
+        $user_data = array('user_id', 'user_name', 'user_surname', 'user_email', 'logged_in');
         foreach($user_data as $data){
             $this->session->unset_userdata($data);
         }
@@ -134,7 +123,6 @@ class Users extends CI_Controller {
                     'user_email' => $loginData->email,
                     'logged_in' => true
                 );
-
                 $this->session->set_userdata($user_data);
                 redirect(base_url());
             }else{
