@@ -35,6 +35,7 @@
                             </div>
                             <div class="col-lg-9">
                                 <form class="mb-5" action="<?= base_url('staff/edit') ?>" method="POST"">
+                                <input type="text" name="id"  value="<?= isset($staff->id) ? $staff->id : set_value('id') ?>" hidden>
                                     <div class="form-group">
                                         <label for="name">Ad</label>
                                         <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" required>
@@ -57,7 +58,14 @@
                                         </span>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                                        <button type="submit" class="btn btn-success mr-1 mb-3">
+                                            <i class="fa fa-fw fa-thumbs-up mr-1"></i>
+                                            Güncelle
+                                        </button>
+                                        <button type="button" class="btn btn-secondary mr-1 mb-3" onclick="window.history.back();">
+                                            <i class="fa fa-fw fa-arrow-left mr-1"></i>
+                                            Geri Git
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -75,20 +83,5 @@
 
     </div>
     <!-- END Page Container -->
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.7.0/dist/sweetalert2.all.min.js"></script>
-
-    <?php if($this->session->flashdata('add_message')): ?>
-    <script>
-        Swal.fire({
-            title: "<?= $this->session->flashdata('add_message')['title'] ?>",
-            text: "<?= $this->session->flashdata('add_message')['text'] ?>",
-            type: "<?= $this->session->flashdata('add_message')['type'] ?>",
-            confirmButtonText: "Tamam",
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
-    </script>
-    <?php endif; ?>
 
 <?php $this->load->view('include/footer'); ?>

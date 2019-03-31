@@ -26,7 +26,7 @@ class Staff extends CI_Controller{
 
         $data = array(
             'title' => 'ALKÜ PİTS - Personel Listesi',
-            'stafflist' => $this->staff_model->getActiveStaffList(),
+            'stafflist' => $this->staff_model->getStaffList(),
             'jsload' => array(
                 'plugins/datatables/jquery.dataTables.min.js',
                 'plugins/datatables/dataTables.bootstrap4.min.js',
@@ -41,8 +41,7 @@ class Staff extends CI_Controller{
 
         $staff = $this->staff_model->isStaff($id);
 
-        if(!$staff) redirect('staff/list');
-
+        if(!$staff) show_404();
 
         $data = array(
             'title' => 'ALKÜ PİTS - Personel Düzenle',
@@ -60,7 +59,7 @@ class Staff extends CI_Controller{
     public function add_valid()
     {
 
-        if(!$this->input->post()) redirect('staff/add');
+        if(!$this->input->post()) show_404();
 
         $config = array(
             array(
@@ -115,7 +114,7 @@ class Staff extends CI_Controller{
 
     public function edit_valid(){
 
-        if(!$this->input->post()) redirect('staff/list');
+        if(!$this->input->post()) show_404();
 
         $config = array(
             array(
@@ -156,14 +155,20 @@ class Staff extends CI_Controller{
                     'type' => 'success'
                 )
             );
-
-
-
-            //redirect(base_url('staff/list'));
+            $this->staff_model->updateStaff($this->input->post('id'), $this->input->post('name'), $this->input->post('surname'), $this->input->post('title'));
+            redirect(base_url('staff/list'));
         }else{
             $data = array('title' => 'ALKÜ PİTS - Personel Düzenle');
             $this->load->view('staff/edit', $data);
         }
+
+    }
+
+    public function change(){
+
+        if(!$this->input->post()) show_404();
+
+        echo $this->staff_model->changeStaffActive($this->input->post('id'), $this->input->post('status'));
 
     }
 
