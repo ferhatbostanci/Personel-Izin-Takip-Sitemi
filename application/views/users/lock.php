@@ -7,7 +7,7 @@
 
             <!-- Page Content -->
             <div class="bg-image" style="background-image: url('<?= base_url() ?>assets/images/photos/alanya.jpg');">
-                <div class="hero-static bg-black-25">
+                <div class="hero-static bg-white-75">
                     <div class="content">
                         <div class="row justify-content-center">
                             <div class="col-md-8 col-lg-6 col-xl-4">
@@ -28,7 +28,7 @@
 
                                             <form class="js-validation-lock" action="<?= base_url('users/lock') ?>" method="POST">
                                                 <div class="form-group py-3 text-left">
-                                                    <input type="password" class="form-control form-control-lg form-control-alt <?= $this->session->flashdata('password_error') ? 'is-invalid' : '' ?>" name="password" placeholder="Parola" required>
+                                                    <input type="password" class="form-control form-control-lg form-control-alt <?= $this->session->flashdata('password_error') ? 'is-invalid' : '' ?>" name="password" placeholder="Parolanız" required>
                                                     <span class="invalid-feedback" style="display: unset;">
                                                         <?= $this->session->flashdata('password_error') ?>
                                                     </span>

@@ -26,6 +26,15 @@
             <!-- Page Content -->
             <div class="content">
 
+                <div class="alert alert-info d-flex align-items-center animated fadeIn" role="alert">
+                    <div class="flex-00-auto">
+                        <i class="fa fa-fw fa-info-circle"></i>
+                    </div>
+                    <div class="flex-fill ml-3">
+                        <p class="mb-0">Personel artık üniversitede değilse <i class="alert-link">Durum</i> göstergesini pasif hale getiriniz! Güvenlik nedeniyle silme işlemi yapılmamakta.</p>
+                    </div>
+                </div>
+
                 <!-- Dynamic Table Simple -->
                 <div class="block">
                     <div class="block-header">

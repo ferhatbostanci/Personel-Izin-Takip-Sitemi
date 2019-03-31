@@ -45,6 +45,13 @@
                             <span class="nav-main-link-name">Personel Listele</span>
                         </a>
                     </li>
+                    <li class="nav-main-heading">İZİN İŞLEMLERİ</li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link <?= $this->uri->uri_string() == 'leave/add' ? 'active' : '' ?>"" href="<?= base_url('leave/add') ?>">
+                            <i class="nav-main-link-icon fa fa-calendar-plus"></i>
+                            <span class="nav-main-link-name">İzin Ekle</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- END Side Navigation -->

@@ -27,6 +27,11 @@ class Staff_model extends CI_Model {
         return $this->db->get('staff')->num_rows();
     }
 
+    public function getLeaveTypes(){
+        $result = $this->db->get('leave_types')->result();
+        return json_decode(json_encode($result), 1);
+    }
+
     /*
      * Insert
      */

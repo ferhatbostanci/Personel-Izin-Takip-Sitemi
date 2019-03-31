@@ -7,7 +7,7 @@
 
             <!-- Page Content -->
             <div class="bg-image" style="background-image: url('<?= base_url() ?>assets/images/photos/alanya.jpg');">
-                <div class="hero-static bg-white-95">
+                <div class="hero-static bg-white-75">
                     <div class="content">
                         <div class="row justify-content-center">
                             <div class="col-md-8 col-lg-6 col-xl-5">
