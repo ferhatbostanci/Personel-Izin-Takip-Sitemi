@@ -30,6 +30,11 @@
                 <div class="block">
                     <div class="block-header">
                         <h3 class="block-title">KAYITLI PERSONEL LİSTESİ</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" onclick="window.location.reload();">
+                                <i class="si si-reload"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="block-content block-content-full">
                         <table class="table table-bordered table-striped table-vcenter js-dataTable-simple">
@@ -86,7 +91,7 @@
     <!-- END Page Container -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.7.0/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="<?= base_url('assets/js/plugins/jquery/jquery.slim.min.js') ?>"></script>
 
     <script>
         function changeActive(data) {

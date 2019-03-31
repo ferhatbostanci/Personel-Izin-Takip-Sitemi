@@ -34,11 +34,15 @@
                             <span class="nav-main-link-name">Kontrol Paneli</span>
                         </a>
                     </li>
-                    <li class="nav-main-heading">GENEL İŞLEMLER</li>
+                    <li class="nav-main-heading">PERSONEL İŞLEMLERİ</li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="javascript:void(0)">
-                            <i class="nav-main-link-icon si si-calendar"></i>
-                            <span class="nav-main-link-name">Yıllık İzin İşlemleri</span>
+                        <a class="nav-main-link <?= $this->uri->uri_string() == 'staff/add' ? 'active' : '' ?>"" href="<?= base_url('staff/add') ?>">
+                            <i class="nav-main-link-icon fa fa-plus"></i>
+                            <span class="nav-main-link-name">Personel Ekle</span>
+                        </a>
+                        <a class="nav-main-link <?= $this->uri->uri_string() == 'staff/list' ? 'active' : '' ?>"" href="<?= base_url('staff/list') ?>">
+                            <i class="nav-main-link-icon fa fa-list"></i>
+                            <span class="nav-main-link-name">Personel Listele</span>
                         </a>
                     </li>
                 </ul>

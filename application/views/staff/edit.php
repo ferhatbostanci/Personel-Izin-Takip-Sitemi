@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Ünvanı</label>
-                                        <input type="text" class="form-control <?= form_error('title') ? 'is-invalid' : '' ?>" name="title" placeholder="Personelin Ünvanı" value="<?= isset($staff->title) ? $staff->title : set_value('title') ?>" maxlength="50" >
+                                        <input type="text" class="form-control <?= form_error('title') ? 'is-invalid' : '' ?>" name="title" placeholder="Personelin Ünvanı" value="<?= isset($staff->title) ? $staff->title : set_value('title') ?>" maxlength="50" required>
                                         <span class="invalid-feedback" style="display: unset;">
                                             <?= form_error('title') ?>
                                         </span>
