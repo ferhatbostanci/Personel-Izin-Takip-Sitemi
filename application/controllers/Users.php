@@ -37,6 +37,7 @@ class Users extends CI_Controller {
         $user_data = array(
             'lock' => true
         );
+        if(isset($_SERVER["HTTP_REFERER"])) $user_data['ref'] = $_SERVER["HTTP_REFERER"];
         $this->session->set_userdata($user_data);
 
         $data = ['title' => 'Hesap Kilitlendi'];
@@ -47,7 +48,7 @@ class Users extends CI_Controller {
     public function logout()
     {
 
-        $user_data = array('user_id', 'user_name', 'user_surname', 'user_email', 'logged_in', 'lock');
+        $user_data = array('user_id', 'user_name', 'user_surname', 'user_email', 'logged_in', 'lock', 'ref');
         foreach($user_data as $data){
             $this->session->unset_userdata($data);
         }
@@ -239,7 +240,13 @@ class Users extends CI_Controller {
         $loginData = $this->user_model->login($this->session->userdata('user_email'), $this->input->post('password'));
         if($loginData){
             $this->session->unset_userdata('lock');
-            redirect(base_url());
+            $ref = $this->session->userdata('ref');
+            if($ref){
+                $this->session->unset_userdata('ref');
+                redirect($ref);
+            }else{
+                redirect(base_url());
+            }
         }else{
             $this->session->set_flashdata('password_error', 'Parola hatalı');
             $data = ['title' => 'Hesap Kilitlendi'];
