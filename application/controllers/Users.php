@@ -8,6 +8,7 @@ class Users extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('user_model');
+        $this->registrationOn = false;
     }
 
     public function login()
@@ -15,7 +16,10 @@ class Users extends CI_Controller {
 
         if($this->session->userdata('logged_in')) redirect(base_url());
 
-        $data = ['title' => 'Giriş Yap'];
+        $data = [
+            'title' => 'Giriş Yap',
+            'registrationOn' => $this->registrationOn
+        ];
         $this->load->view('users/login', $data);
 
     }
@@ -23,6 +27,7 @@ class Users extends CI_Controller {
     public function register()
     {
 
+        if(!$this->registrationOn) show_404();
         if($this->session->userdata('logged_in')) redirect(base_url());
 
         $data = ['title' => 'Kayıt Ol'];
@@ -64,6 +69,7 @@ class Users extends CI_Controller {
     public function activation()
     {
 
+        if(!$this->registrationOn) show_404();
         if(!$this->input->get()) redirect('users/login');
 
         if($this->user_model->isUserActive($this->input->get('email'))){
@@ -155,6 +161,7 @@ class Users extends CI_Controller {
     public function register_valid()
     {
 
+        if(!$this->registrationOn) show_404();
         if(!$this->input->post()) redirect('users/register');
 
         $config = array(

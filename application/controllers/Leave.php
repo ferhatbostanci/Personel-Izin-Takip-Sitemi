@@ -7,6 +7,7 @@ class Leave extends CI_Controller{
     {
         parent::__construct();
 
+        $this->load->library('form_validation');
         $this->load->model('staff_model');
 
         if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
@@ -18,8 +19,8 @@ class Leave extends CI_Controller{
     {
 
         $data = array(
-            'title' => 'İzni Ekle',
-            'stafflist' => $this->staff_model->getStaffList(),
+            'title' => 'ALKÜ PİTS - İzni Ekle',
+            'stafflist' => $this->staff_model->getActiveStaffList(),
             'leavetypes' => $this->staff_model->getLeaveTypes(),
             'jsload' => array(
                 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
@@ -27,22 +28,127 @@ class Leave extends CI_Controller{
                 'plugins/select2/js/select2.full.min.js'
             )
         );
-
         $this->load->view('leave/add', $data);
 
     }
+
+    public function list(){
+
+        $leavehistory = $this->staff_model->getDetailLeaveHistory();
+
+        $data = array(
+            'title' => 'ALKÜ PİTS - İzni Listesi',
+            'leavehistory' => $leavehistory,
+            'jsload' => array(
+                'plugins/datatables/jquery.dataTables.min.js',
+                'plugins/datatables/dataTables.bootstrap4.min.js',
+                'pages/be_tables_datatables.min.js'
+            )
+        );
+        $this->load->view('leave/list', $data);
+
+    }
+
+
+    /*
+     * POST Validation
+     */
 
     public function add_valid(){
 
         if(!$this->input->post()) show_404();
 
-        $startdate = str_replace('/', '-', $this->input->post('startdate'));
-        $enddate = str_replace('/', '-', $this->input->post('enddate'));
-        $startdate = date("Y/m/d", strtotime($startdate));
-        $enddate = date("Y/m/d", strtotime($enddate));
+        $config = array(
+            array(
+                'field' => 'staffid',
+                'label' => 'Personel',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => '%s adresi boş bırakılamaz.'
+                ),
+            ),
+            array(
+                'field' => 'startdate',
+                'label' => 'Tarih',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => '%s boş bırakılamaz.'
+                )
+            ),
+            array(
+                'field' => 'enddate',
+                'label' => 'Tarih',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => '%s boş bırakılamaz.'
+                )
+            ),
+            array(
+                'field' => 'leavetype',
+                'label' => 'İzin Türü',
+                'rules' => 'required|callback_check_leave_type',
+                'errors' => array(
+                    'required' => '%s boş bırakılamaz.'
+                )
+            )
+        );
+        $this->form_validation->set_rules($config);
 
-        echo getWorkdays($startdate, $enddate);
+        if($this->form_validation->run() == TRUE){
 
+            $startdate = str_replace('/', '-', $this->input->post('startdate'));
+            $enddate = str_replace('/', '-', $this->input->post('enddate'));
+
+            // Get work day
+            $startdatework = date("Y/m/d", strtotime($startdate));
+            $enddatework = date("Y/m/d", strtotime($enddate));
+            $workday = getWorkdays($startdatework, $enddatework);
+
+            // Convert date
+            $startdate = date("Y-m-d", strtotime($startdate));
+            $enddate = date("Y-m-d", strtotime($enddate));
+
+            $this->staff_model->addLeaveHistory($this->input->post('staffid'), $this->session->userdata('user_id'), $startdate, $enddate, $this->input->post('leavetype'));
+
+            $this->session->set_flashdata('add_message',
+                array(
+                    'title' => 'Kayıt Tamamlandı!',
+                    'text' => 'Personel izni başarıyla eklendi. İzin listesinden kontrol edebilirsiniz.',
+                    'type' => 'success'
+                )
+            );
+            redirect(current_url());
+
+        }else{
+            $data = array(
+                'title' => 'İzni Ekle',
+                'stafflist' => $this->staff_model->getStaffList(),
+                'leavetypes' => $this->staff_model->getLeaveTypes(),
+                'jsload' => array(
+                    'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
+                    'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js',
+                    'plugins/select2/js/select2.full.min.js'
+                )
+            );
+
+            $this->load->view('leave/add', $data);
+        }
+
+    }
+
+
+    /*
+     * Check
+     */
+
+    public function check_leave_type($id)
+    {
+        if($id == 0){
+            $this->form_validation->set_message('check_leave_type', '%s boş bırakılamaz.');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
     }
 
 }

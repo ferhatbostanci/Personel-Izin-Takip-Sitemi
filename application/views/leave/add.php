@@ -44,30 +44,39 @@
                                         <select class="js-select2 form-control" name="staffid" style="width: 100%;" data-placeholder="Personel seç..." autocomplete="off" required>
                                             <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
                                             <?php foreach($stafflist as $staff): ?>
-                                                <option value="<?= $staff['id'] ?>"><?= $staff['name'] . ' ' . $staff['surname'] ?> (<?= $staff['title'] ?>)</option>
+                                                <option value="<?= $staff['id'] ?>" <?= set_value('staffid') == $staff['id'] ? 'selected' : '' ?> ><?= $staff['name'] . ' ' . $staff['surname'] ?> (<?= $staff['title'] ?>)</option>
                                             <?php endforeach; ?>
                                         </select>
+                                        <span class="invalid-feedback" style="display: unset;">
+                                            <?= form_error('staffid') ?>
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label for="surname">İzin Süresi</label>
                                         <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-date-language="tr" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                            <input type="text" class="form-control" name="startdate" placeholder="Başlangıç" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" required>
+                                            <input type="text" class="form-control" name="startdate" placeholder="Başlangıç" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" value="<?= set_value('startdate') ?>" required>
                                             <div class="input-group-prepend input-group-append">
-                                                    <span class="input-group-text font-w600">
-                                                        <i class="fa fa-fw fa-arrow-right"></i>
-                                                    </span>
+                                                <span class="input-group-text font-w600">
+                                                    <i class="fa fa-fw fa-arrow-right"></i>
+                                                </span>
                                             </div>
-                                            <input type="text" class="form-control" name="enddate" placeholder="Bitiş" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" required>
+                                            <input type="text" class="form-control" name="enddate" placeholder="Bitiş" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" value="<?= set_value('enddate') ?>" required>
+                                            <span class="invalid-feedback" style="display: unset;">
+                                                <?= form_error('startdate') ? form_error('startdate') : form_error('enddate') ?>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Ünvanı</label>
+                                        <label for="title">İzin Türü</label>
                                         <select class="form-control" name="leavetype" autocomplete="off" required>
                                             <option value="0">Lütfen seçiniz</option>
                                             <?php foreach($leavetypes as $leavetype): ?>
-                                                <option value="<?= $leavetype['id'] ?>"><?= $leavetype['name'] ?></option>
+                                                <option value="<?= $leavetype['id'] ?>" <?= set_value('leavetype') == $leavetype['id'] ? 'selected' : '' ?> ><?= $leavetype['name'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
+                                        <span class="invalid-feedback" style="display: unset;">
+                                            <?= form_error('leavetype') ?>
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success">Kaydet</button>
@@ -88,5 +97,19 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.7.0/dist/sweetalert2.all.min.js"></script>
+
+<?php if($this->session->flashdata('add_message')): ?>
+    <script>
+        Swal.fire({
+            title: "<?= $this->session->flashdata('add_message')['title'] ?>",
+            text: "<?= $this->session->flashdata('add_message')['text'] ?>",
+            type: "<?= $this->session->flashdata('add_message')['type'] ?>",
+            confirmButtonText: "Tamam",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    </script>
+<?php endif; ?>
 
 <?php $this->load->view('include/footer'); ?>

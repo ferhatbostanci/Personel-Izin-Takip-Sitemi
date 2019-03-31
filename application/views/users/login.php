@@ -17,9 +17,11 @@
                                     <div class="block-header">
                                         <h3 class="block-title">Giriş Yap</h3>
                                         <div class="block-options">
+                                            <?php if($registrationOn): ?>
                                             <a class="btn-block-option js-tooltip-enabled" href="<?= base_url('users/register') ?>" data-toggle="tooltip" data-placement="left" title="" data-original-title="Kayıt Ol">
                                                 <i class="fa fa-user-plus"></i>
                                             </a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
 
@@ -27,7 +29,11 @@
                                         <div class="p-sm-3 px-lg-4 py-lg-5">
 
                                             <h1 class="mb-2">ALKÜ Personel İzin Takip Sistemi</h1>
-                                            <p>Hoşgeldiniz, lütfen giriş yapınız.</p>
+                                            <p>
+                                                Hoşgeldiniz, lütfen giriş yapınız.
+                                                <br>
+                                                E-Posta: "test@test.com" | Parola: "test"
+                                            </p>
 
                                             <!-- Sign In Form -->
                                             <form action="<?= base_url('users/login') ?>" method="POST">

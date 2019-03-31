@@ -32,6 +32,11 @@ class Staff_model extends CI_Model {
         return json_decode(json_encode($result), 1);
     }
 
+    public function getDetailLeaveHistory(){
+        $result = $this->db->get('detail_leave_history')->result();
+        return json_decode(json_encode($result), 1);
+    }
+
     /*
      * Insert
      */
@@ -44,6 +49,18 @@ class Staff_model extends CI_Model {
             'creation_date' => time()
         );
         return $this->db->insert('staff', $data);
+    }
+
+    public function addLeaveHistory($staffid, $userid, $startdate, $enddate, $leavetype){
+        $data = array(
+            'staff_id' => $staffid,
+            'user_id' => $userid,
+            'start_date' => $startdate,
+            'end_date' => $enddate,
+            'leave_type' => $leavetype,
+            'registration_date' => time()
+        );
+        return $this->db->insert('leave_history', $data);
     }
 
     /*

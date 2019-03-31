@@ -39,7 +39,7 @@
                         <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">İZİNLİ PERSONEL</div>
-                                <div class="font-size-h2 font-w400 text-dark">0</div>
+                                <div class="font-size-h2 font-w400 text-dark">2</div>
                             </div>
                         </a>
                     </div>
@@ -47,7 +47,7 @@
                         <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">BUGÜN YAPILAN İŞLEMLER</div>
-                                <div class="font-size-h2 font-w400 text-dark">9</div>
+                                <div class="font-size-h2 font-w400 text-dark">22</div>
                             </div>
                         </a>
                     </div>
@@ -55,7 +55,7 @@
                         <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">BU HAFTA YAPILAN İŞLEMLER</div>
-                                <div class="font-size-h2 font-w400 text-dark">46</div>
+                                <div class="font-size-h2 font-w400 text-dark">65</div>
                             </div>
                         </a>
                     </div>
