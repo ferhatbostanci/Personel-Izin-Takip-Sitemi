@@ -109,7 +109,7 @@
                                 </a>
                                 <div role="separator" class="dropdown-divider"></div>-->
                                 <h5 class="dropdown-header text-uppercase">HAREKETLER</h5>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="<?= base_url('users/lock') ?>">
                                     <span>Hesabi Kilitle</span>
                                     <i class="si si-lock ml-1"></i>
                                 </a>

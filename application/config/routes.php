@@ -56,5 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 // Configurations
 $route['users/login']['post'] = 'users/login_valid';
 $route['users/register']['post'] = 'users/register_valid';
+$route['users/lock']['post'] = 'users/unlock';
+
 $route['staff/add']['post'] = 'staff/add_valid';
 $route['staff/edit']['post'] = 'staff/edit_valid';

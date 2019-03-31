@@ -29,10 +29,24 @@ class Users extends CI_Controller {
 
     }
 
+    public function lock(){
+
+        if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
+
+        $user_data = array(
+            'lock' => true
+        );
+        $this->session->set_userdata($user_data);
+
+        $data = ['title' => 'Hesap Kilitlendi'];
+        $this->load->view('users/lock', $data);
+
+    }
+
     public function logout()
     {
 
-        $user_data = array('user_id', 'user_name', 'user_surname', 'user_email', 'logged_in');
+        $user_data = array('user_id', 'user_name', 'user_surname', 'user_email', 'logged_in', 'lock');
         foreach($user_data as $data){
             $this->session->unset_userdata($data);
         }
@@ -214,6 +228,22 @@ class Users extends CI_Controller {
 
         $data = ['title' => 'Kayıt Ol'];
         $this->load->view('users/register', $data);
+
+    }
+
+    public function unlock(){
+
+        if(!$this->input->post()) show_404();
+
+        $loginData = $this->user_model->login($this->session->userdata('user_email'), $this->input->post('password'));
+        if($loginData){
+            $this->session->unset_userdata('lock');
+            redirect(base_url());
+        }else{
+            $this->session->set_flashdata('password_error', 'Parola hatalı');
+            $data = ['title' => 'Hesap Kilitlendi'];
+            $this->load->view('users/lock', $data);
+        }
 
     }
 

@@ -7,12 +7,14 @@ class Staff extends CI_Controller{
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('staff_model');
+
+        if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
+        if($this->session->userdata('lock')) redirect('users/lock');
+
     }
 
     public function add()
     {
-
-        if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
 
         $data = array('title' => 'ALKÜ PİTS - Personel Ekle');
         $this->load->view('staff/add', $data);
@@ -21,8 +23,6 @@ class Staff extends CI_Controller{
 
     public function list()
     {
-
-        if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
 
         $data = array(
             'title' => 'ALKÜ PİTS - Personel Listesi',
