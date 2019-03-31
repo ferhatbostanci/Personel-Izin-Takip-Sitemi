@@ -39,7 +39,7 @@
                         <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">İZİNLİ PERSONEL</div>
-                                <div class="font-size-h2 font-w400 text-dark">2</div>
+                                <div class="font-size-h2 font-w400 text-dark"><?= $this->staff_model->getActiveLeaveHistoryNumber() ?></div>
                             </div>
                         </a>
                     </div>

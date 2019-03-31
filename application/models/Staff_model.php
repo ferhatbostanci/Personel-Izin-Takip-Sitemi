@@ -37,6 +37,11 @@ class Staff_model extends CI_Model {
         return json_decode(json_encode($result), 1);
     }
 
+    public function getActiveLeaveHistoryNumber(){
+        $this->db->where('end_date >=', date('Y-m-d', time()));
+        return $this->db->get('leave_history')->num_rows();
+    }
+
     /*
      * Insert
      */

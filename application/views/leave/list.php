@@ -41,9 +41,8 @@
                             <thead>
                             <tr>
                                 <th class="text-center" style="width: 5%;">#</th>
-                                <th style="width: 25%;">AD-SOYAD</th>
-                                <th style="width: 20%;">KAYDEDEN PERSONEL</th>
-                                <th style="width: 10%;">KAYIT TARİHİ</th>
+                                <th style="width: 30%;">AD-SOYAD</th>
+                                <th style="width: 30%;">KAYDEDEN PERSONEL</th>
                                 <th style="width: 20%;">İZİN BAŞLANGIÇ</th>
                                 <th style="width: 20%;">İZİN BİTİŞ</th>
                             </tr>
@@ -52,11 +51,11 @@
                             <?php $i=0; foreach($leavehistory as $history): $i++; ?>
                                 <tr>
                                     <td class="text-center font-size-sm"><?= $i ?></td>
-                                    <td class="font-w600 font-size-sm"><?= $history['staffname'] ?></td>
-                                    <td class="font-w500 font-size-sm"><?= $history['recordby'] ?></td>
-                                    <td>
-                                        <em class="text-muted font-size-sm"><?= date('d/m/Y', $history['registration_date']) ?></em>
+                                    <td class="font-w600 font-size-sm">
+                                        <?= $history['staffname'] ?>
+                                        <span class="badge badge-info"><?= strtotime($history['end_date']) < time() ? 'Bitti' : '' ?></span>
                                     </td>
+                                    <td class="font-w500 font-size-sm"><?= $history['recordby'] ?></td>
                                     <td>
                                         <em class="text-muted font-size-sm"><?= date('d/m/Y', strtotime($history['start_date'])) ?></em>
                                     </td>
