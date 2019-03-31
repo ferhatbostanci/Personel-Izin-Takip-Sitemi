@@ -42,7 +42,7 @@
                             <tr>
                                 <th class="text-center" style="width: 5%;">#</th>
                                 <th style="width: 30%;">AD-SOYAD</th>
-                                <th style="width: 30%;">KAYDEDEN PERSONEL</th>
+                                <th style="width: 25%;">KAYDEDEN PERSONEL</th>
                                 <th style="width: 20%;">İZİN BAŞLANGIÇ</th>
                                 <th style="width: 20%;">İZİN BİTİŞ</th>
                             </tr>
@@ -53,7 +53,7 @@
                                     <td class="text-center font-size-sm"><?= $i ?></td>
                                     <td class="font-w600 font-size-sm">
                                         <?= $history['staffname'] ?>
-                                        <span class="badge badge-info"><?= strtotime($history['end_date']) < time() ? 'Bitti' : '' ?></span>
+                                        <span class="badge badge-danger"><?= strtotime($history['end_date']) < time() ? 'Bitti' : '' ?></span>
                                     </td>
                                     <td class="font-w500 font-size-sm"><?= $history['recordby'] ?></td>
                                     <td>
