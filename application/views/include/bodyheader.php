@@ -6,7 +6,7 @@
                     <i class="fa fa-circle-notch text-primary"></i>
                     <span class="smini-hide">
                         <span class="font-w700 font-size-h5">ALKÜ PİTS</span>
-                        <span class="font-w300 small">Pre-alpha</span>
+                        <span class="font-w300 small">Alpha</span>
                     </span>
                 </span>
                 <!-- END Logo -->

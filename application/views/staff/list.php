@@ -70,17 +70,17 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="custom-control custom-switch custom-control-success custom-control-lg">
-                                        <input type="checkbox" class="custom-control-input" dataID="<?= $staff['id'] ?>" id="checkbox-<?= $staff['id'] ?>" onchange="changeActive(this);" <?= $staff['active'] ? 'checked' : '' ?>>
+                                        <input type="checkbox" class="custom-control-input" dataURL="<?= base_url('staff/edit/') . $staff['id'] ?>" dataID="<?= $staff['id'] ?>" id="checkbox-<?= $staff['id'] ?>" onchange="changeActive(this);" <?= $staff['active'] ? 'checked' : '' ?>>
                                         <label class="custom-control-label" for="checkbox-<?= $staff['id'] ?>"></label>
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <div class="btn-group">
+                                    <div class="btn-group" id="editbtn-<?= $staff['id'] ?>">
                                         <?php if($staff['active']): ?>
                                         <a class="btn btn-sm btn-dark js-tooltip-enabled" href="<?= base_url('staff/edit/') . $staff['id'] ?>">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
                                         </a>
-                                        <!--<a class="btn btn-sm btn-light js-tooltip-enabled" href="<?= base_url('staff/delete/') . $staff['id'] ?>">
+                                        <!--<a class="btn btn-sm btn-light js-tooltip-enabled" href="">
                                             <i class="fa fa-fw fa-times"></i>
                                         </a>-->
                                         <?php endif; ?>
@@ -110,7 +110,18 @@
 
     <script>
         function changeActive(data) {
+            var id = data.getAttribute('dataID');
+            var url = data.getAttribute('dataURL');
             var status = data.checked ? 1 : 0;
+
+            // HTML DOM
+            if(status){
+                $("#editbtn-"+id).html("<a class='btn btn-sm btn-dark js-tooltip-enabled' href='" + url +"'><i class='fa fa-fw fa-pencil-alt'></i></a>");
+            }else{
+                $("#editbtn-"+id).html("");
+            }
+
+            // Ajax POST
             $.post("<?= base_url() ?>staff/change", {
                 id: data.getAttribute('dataID'),
                 status: status

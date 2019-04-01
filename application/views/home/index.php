@@ -47,7 +47,7 @@
                         <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">BUGÜN YAPILAN İŞLEMLER</div>
-                                <div class="font-size-h2 font-w400 text-dark">22</div>
+                                <div class="font-size-h2 font-w400 text-dark"><?= $this->staff_model->getTodayJobNumber() ?></div>
                             </div>
                         </a>
                     </div>
@@ -55,7 +55,7 @@
                         <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">BU HAFTA YAPILAN İŞLEMLER</div>
-                                <div class="font-size-h2 font-w400 text-dark">65</div>
+                                <div class="font-size-h2 font-w400 text-dark"><?= $this->staff_model->getWeekJobNumber() ?></div>
                             </div>
                         </a>
                     </div>

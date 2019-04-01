@@ -42,6 +42,24 @@ class Staff_model extends CI_Model {
         return $this->db->get('leave_history')->num_rows();
     }
 
+    public function getTodayJobNumber(){
+        $midnight = strtotime('today midnight');
+        $this->db->where('registration_date >=', $midnight);
+        $leavehistory = $this->db->get('leave_history')->num_rows();
+        $this->db->where('creation_date >=', $midnight);
+        $staff = $this->db->get('staff')->num_rows();
+        return $leavehistory + $staff;
+    }
+
+    public function getWeekJobNumber(){
+        $week = strtotime(date('Y/m/d', strtotime('-1 week')));
+        $this->db->where('registration_date >=', $week);
+        $leavehistory = $this->db->get('leave_history')->num_rows();
+        $this->db->where('creation_date >=', $week);
+        $staff = $this->db->get('staff')->num_rows();
+        return $leavehistory + $staff;
+    }
+
     /*
      * Insert
      */
@@ -74,6 +92,7 @@ class Staff_model extends CI_Model {
         );
         return $this->db->insert('leave_history', $data);
     }
+
 
     /*
      * Update
