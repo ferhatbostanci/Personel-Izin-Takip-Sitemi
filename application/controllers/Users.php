@@ -8,7 +8,7 @@ class Users extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('user_model');
-        $this->registrationOn = false;
+        $this->registrationOn = true;
     }
 
     public function login()
