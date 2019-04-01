@@ -22,6 +22,10 @@ class Leave extends CI_Controller{
             'title' => 'ALKÜ PİTS - İzni Ekle',
             'stafflist' => $this->staff_model->getActiveStaffList(),
             'leavetypes' => $this->staff_model->getLeaveTypes(),
+            'cssload' => array(
+                'assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css',
+                'assets/js/plugins/select2/css/select2.min.css'
+            ),
             'jsload' => array(
                 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
                 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js',
@@ -39,6 +43,9 @@ class Leave extends CI_Controller{
         $data = array(
             'title' => 'ALKÜ PİTS - İzni Listesi',
             'leavehistory' => $leavehistory,
+            'cssload' => array(
+                'assets/js/plugins/datatables/dataTables.bootstrap4.css'
+            ),
             'jsload' => array(
                 'plugins/datatables/jquery.dataTables.min.js',
                 'plugins/datatables/dataTables.bootstrap4.min.js',
@@ -124,6 +131,10 @@ class Leave extends CI_Controller{
                 'title' => 'İzni Ekle',
                 'stafflist' => $this->staff_model->getStaffList(),
                 'leavetypes' => $this->staff_model->getLeaveTypes(),
+                'cssload' => array(
+                    'assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css',
+                    'assets/js/plugins/select2/css/select2.min.css'
+                ),
                 'jsload' => array(
                     'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
                     'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js',

@@ -50,10 +50,22 @@
                                             </span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="title">Ünvanı</label>
-                                            <input type="text" class="form-control <?= form_error('title') ? 'is-invalid' : '' ?>" name="title" placeholder="Personelin Ünvanı" value="<?= set_value('title') ?>" maxlength="50" required>
+                                            <label for="title">Ünvan</label>
+                                            <span class="badge badge-info">İşçi ise boş bırakın</span>
+                                            <input type="text" class="form-control <?= form_error('title') ? 'is-invalid' : '' ?>" name="title" placeholder="Personelin Ünvanı" value="<?= set_value('title') ?>" maxlength="50">
                                             <span class="invalid-feedback" style="display: unset;">
                                                 <?= form_error('title') ?>
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="surname">Görev süresi 10 yılı geçmiş mi?</label>
+                                            <span class="badge badge-info">Çalışan ise kullanın</span>
+                                            <div class="custom-control custom-checkbox custom-control-light custom-control-lg mb-1">
+                                                <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= set_value('tenyear') ? 'checked' : '' ?>>
+                                                <label class="custom-control-label" for="tenyear">Evet</label>
+                                            </div>
+                                            <span class="invalid-feedback" style="display: unset;">
+                                                <?= form_error('surname') ?>
                                             </span>
                                         </div>
                                         <div class="form-group">

@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full">
-                        <table class="table table-bordered table-striped table-vcenter js-dataTable-simple">
+                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                             <thead>
                             <tr>
                                 <th class="text-center" style="width: 5%;">#</th>

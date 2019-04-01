@@ -46,11 +46,18 @@ class Staff_model extends CI_Model {
      * Insert
      */
 
-    public function addStaff($name, $surname, $title){
+    public function addStaff($name, $surname, $title, $tenyear){
+        if(empty($title)){
+            $title = NULL;
+            $tenyear = NULL;
+        }
+        if(!empty($title) && isset($tenyear)) $tenyear = 1;
+        if(!empty($title) && !isset($tenyear)) $tenyear = 0;
         $data = array(
             'name' => $name,
             'surname' => $surname,
             'title' => $title,
+            'ten_year' => $tenyear,
             'creation_date' => time()
         );
         return $this->db->insert('staff', $data);
@@ -72,10 +79,17 @@ class Staff_model extends CI_Model {
      * Update
      */
 
-    public function updateStaff($id, $name, $surname, $title){
+    public function updateStaff($id, $name, $surname, $title, $tenyear){
+        if(empty($title)){
+            $title = NULL;
+            $tenyear = NULL;
+        }
+        if(!empty($title) && isset($tenyear)) $tenyear = 1;
+        if(!empty($title) && !isset($tenyear)) $tenyear = 0;
         $this->db->set('name', $name);
         $this->db->set('surname', $surname);
         $this->db->set('title', $title);
+        $this->db->set('ten_year', $tenyear);
         $this->db->where('id', $id);
         return $this->db->update('staff');
     }

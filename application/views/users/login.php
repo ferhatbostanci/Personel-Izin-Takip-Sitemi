@@ -31,8 +31,6 @@
                                             <h1 class="mb-2">ALKÜ Personel İzin Takip Sistemi</h1>
                                             <p>
                                                 Hoşgeldiniz, lütfen giriş yapınız.
-                                                <br>
-                                                E-Posta: "test@test.com" | Parola: "test"
                                             </p>
 
                                             <!-- Sign In Form -->

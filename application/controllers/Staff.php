@@ -29,6 +29,9 @@ class Staff extends CI_Controller{
         $data = array(
             'title' => 'ALKÜ PİTS - Personel Listesi',
             'stafflist' => $this->staff_model->getStaffList(),
+            'cssload' => array(
+                'assets/js/plugins/datatables/dataTables.bootstrap4.css'
+            ),
             'jsload' => array(
                 'plugins/datatables/jquery.dataTables.min.js',
                 'plugins/datatables/dataTables.bootstrap4.min.js',
@@ -85,9 +88,8 @@ class Staff extends CI_Controller{
             array(
                 'field' => 'title',
                 'label' => 'Ünvan',
-                'rules' => 'trim|required|max_length[50]',
+                'rules' => 'trim|max_length[50]',
                 'errors' => array(
-                    'required' => '%s boş bırakılamaz',
                     'max_length' => '{field} alanının uzunluğu {param} karakteri aşamaz'
                 )
             )
@@ -97,7 +99,7 @@ class Staff extends CI_Controller{
 
         if($this->form_validation->run() === TRUE){
 
-            $this->staff_model->addStaff($this->input->post('name'), $this->input->post('surname'), $this->input->post('title'));
+            $this->staff_model->addStaff($this->input->post('name'), $this->input->post('surname'), $this->input->post('title'), $this->input->post('tenyear'));
             $this->session->set_flashdata('add_message',
                 array(
                     'title' => 'Kayıt Tamamlandı!',
@@ -140,9 +142,8 @@ class Staff extends CI_Controller{
             array(
                 'field' => 'title',
                 'label' => 'Ünvan',
-                'rules' => 'trim|required|max_length[50]',
+                'rules' => 'trim|max_length[50]',
                 'errors' => array(
-                    'required' => '%s boş bırakılamaz',
                     'max_length' => '{field} alanının uzunluğu {param} karakteri aşamaz'
                 )
             )
@@ -157,7 +158,7 @@ class Staff extends CI_Controller{
                     'type' => 'success'
                 )
             );
-            $this->staff_model->updateStaff($this->input->post('id'), $this->input->post('name'), $this->input->post('surname'), $this->input->post('title'));
+            $this->staff_model->updateStaff($this->input->post('id'), $this->input->post('name'), $this->input->post('surname'), $this->input->post('title'), $this->input->post('tenyear'));
             redirect(base_url('staff/list'));
         }else{
             $data = array('title' => 'ALKÜ PİTS - Personel Düzenle');
