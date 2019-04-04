@@ -44,7 +44,7 @@
                                         <select class="js-select2 form-control" id="staffid" name="staffid" style="width: 100%;" data-placeholder="Personel seç..." autocomplete="off" onchange="changeStaff(this);" required>
                                             <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
                                             <?php foreach($stafflist as $staff): ?>
-                                                <option value="<?= $staff['id'] ?>" <?= set_value('staffid') == $staff['id'] ? 'selected' : '' ?> ><?= $staff['name'] . ' ' . $staff['surname'] ?></option>
+                                                <option value="<?= $staff['id'] ?>" <?= set_value('staffid') == $staff['id'] ? 'selected' : '' ?> ><?= $staff['name'] . ' ' . $staff['surname'] ?> (<?= $staff['title'] ? $staff['title'] : 'İşçi'  ?>)</option>
                                             <?php endforeach; ?>
                                         </select>
                                         <div id="staffcount"></div>

@@ -54,7 +54,7 @@
                                     <td class="text-center font-size-sm"><?= $i ?></td>
                                     <td class="font-w600 font-size-sm">
                                         <?= $history['staffname'] ?>
-                                        <span class="badge badge-danger"><?= strtotime($history['end_date']) < time() ? 'Bitti' : '' ?></span>
+                                        <span class="badge badge-danger"><?= strtotime($history['end_date']) < strtotime(date('d/m/Y')) ? 'Bitti' : '' ?></span>
                                     </td>
                                     <td class="font-w500 font-size-sm"><?= $history['recordby'] ?></td>
                                     <td>

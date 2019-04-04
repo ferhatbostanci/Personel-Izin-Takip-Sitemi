@@ -100,7 +100,16 @@ class Yearly extends CI_Controller{
             $year = $this->input->post('year');
             $day = $this->input->post('day');
 
-            echo $this->staff_model->addYearlyLeaveData($staffid, $year, $day);
+            $this->staff_model->addYearlyLeaveData($staffid, $year, $day);
+
+            $this->session->set_flashdata('add_message',
+                array(
+                    'title' => 'Kayıt Tamamlandı!',
+                    'text' => 'Personele yıllık izin hakkı başarıyla eklendi.',
+                    'type' => 'success'
+                )
+            );
+            redirect(current_url());
 
         }else{
             $this->add();
