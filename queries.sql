@@ -10,3 +10,12 @@ FROM leave_history
             INNER JOIN staff ON staff.id = leave_history.staff_id
             INNER JOIN users ON users.id = leave_history.user_id
             INNER JOIN leave_types ON leave_types.id = leave_history.leave_type
+
+/*
+ * View 'yearly_leave_data_view'
+ */
+
+SELECT yearly_leave_data.*,
+       CONCAT(staff.name, ' ', staff.surname) AS staffname
+FROM yearly_leave_data
+            INNER JOIN staff ON staff.id = yearly_leave_data.staff_id

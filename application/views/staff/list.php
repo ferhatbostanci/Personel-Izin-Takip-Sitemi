@@ -64,6 +64,9 @@
                                 <td class="d-none d-sm-table-cell">
                                     <?php if($staff['title']): ?>
                                     <span class="badge badge-pill badge-primary"><?= $staff['title'] ?></span>
+                                        <?php if($staff['ten_year'] == 1): ?>
+                                            <span class="badge badge-pill badge-info">10+</span>
+                                        <?php endif; ?>
                                     <?php else: ?>
                                     <span class="badge badge-pill badge-secondary">İşçi</span>
                                     <?php endif; ?>

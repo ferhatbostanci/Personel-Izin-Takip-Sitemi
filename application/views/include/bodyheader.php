@@ -56,6 +56,17 @@
                         <span class="nav-main-link-name">İzinleri Listele</span>
                         </a>
                     </li>
+                    <li class="nav-main-heading">YILLIK HAK İŞLEMLERİ</li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link <?= $this->uri->uri_string() == 'yearly/add' ? 'active' : '' ?>"" href="<?= base_url('yearly/add') ?>">
+                        <i class="nav-main-link-icon fa fa-calendar-plus"></i>
+                        <span class="nav-main-link-name">Yıllık Hak Ekle</span>
+                        </a>
+                        <a class="nav-main-link <?= $this->uri->uri_string() == 'yearly/list' ? 'active' : '' ?>"" href="<?= base_url('yearly/list') ?>">
+                        <i class="nav-main-link-icon fa fa-list-alt"></i>
+                        <span class="nav-main-link-name">Yıllık Hakları Listele</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- END Side Navigation -->

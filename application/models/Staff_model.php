@@ -65,6 +65,20 @@ class Staff_model extends CI_Model {
         return $this->db->get('yearly_leave_data')->row();
     }
 
+    public function getYearlyLeaveDataAll(){
+        $result = $this->db->get('yearly_leave_data_view')->result();
+        return json_decode(json_encode($result), true);
+    }
+
+    public function getStaffTotalInterval($staffid, $year){
+        $this->db->where(array(
+            'staff_id' => $staffid
+        ));
+        $this->db->like('start_date', $year);
+        $this->db->select_sum('day_interval');
+        return $this->db->get('leave_history')->row();
+    }
+
     /*
      * Insert
      */
@@ -147,13 +161,16 @@ class Staff_model extends CI_Model {
         if(!$yearlydata){
             $staff = $this->isStaff($staffid);
             if($staff->ten_year === NULL){ // İşçi
-                $this->addYearlyLeaveData($staffid, $year, 16);
+                return $this->addYearlyLeaveData($staffid, $year, 16);
             }elseif((int) $staff->ten_year === 0){ //Normal
-                $this->addYearlyLeaveData($staffid, $year, 20);
+                return $this->addYearlyLeaveData($staffid, $year, 20);
             }elseif((int) $staff->ten_year === 1){ //10+
-                $this->addYearlyLeaveData($staffid, $year, 30);
+                return $this->addYearlyLeaveData($staffid, $year, 30);
             }
+            return false;
         }
+
+        return false;
 
     }
 
