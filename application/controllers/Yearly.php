@@ -52,6 +52,7 @@ class Yearly extends CI_Controller{
                 'pages/be_tables_datatables.min.js'
             )
         );
+
         $this->load->view('yearly/list', $data);
 
     }
