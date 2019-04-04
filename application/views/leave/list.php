@@ -29,7 +29,7 @@
                 <!-- Dynamic Table Simple -->
                 <div class="block">
                     <div class="block-header">
-                        <h3 class="block-title">KAYITLI PERSONEL İZİN LİSTESİ</h3>
+                        <h3 class="block-title">PERSONEL İZİN LİSTESİ</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option" onclick="window.location.reload();">
                                 <i class="si si-reload"></i>
@@ -43,8 +43,9 @@
                                 <th class="text-center" style="width: 5%;">#</th>
                                 <th style="width: 30%;">AD-SOYAD</th>
                                 <th style="width: 25%;">KAYDEDEN PERSONEL</th>
-                                <th style="width: 20%;">İZİN BAŞLANGIÇ</th>
-                                <th style="width: 20%;">İZİN BİTİŞ</th>
+                                <th style="width: 15%;">BAŞLANGIÇ</th>
+                                <th style="width: 15%;">BİTİŞ</th>
+                                <th style="width: 10%;">Süre</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,6 +62,9 @@
                                     </td>
                                     <td>
                                         <em class="text-muted font-size-sm"><?= date('d/m/Y', strtotime($history['end_date'])) ?></em>
+                                    </td>
+                                    <td>
+                                        <em class="text-muted font-size-sm"><?= $history['day_interval'] ?> Gün</em>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

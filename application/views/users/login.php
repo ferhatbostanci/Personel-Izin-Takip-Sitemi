@@ -17,7 +17,7 @@
                                     <div class="block-header">
                                         <h3 class="block-title">Giriş Yap</h3>
                                         <div class="block-options">
-                                            <?php if(isset($registrationOn)): ?>
+                                            <?php if($registrationOn): ?>
                                             <a class="btn-block-option js-tooltip-enabled" href="<?= base_url('users/register') ?>" data-toggle="tooltip" data-placement="left" title="" data-original-title="Kayıt Ol">
                                                 <i class="fa fa-user-plus"></i>
                                             </a>

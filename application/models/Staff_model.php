@@ -33,7 +33,7 @@ class Staff_model extends CI_Model {
     }
 
     public function getDetailLeaveHistory(){
-        $result = $this->db->get('detail_leave_history')->result();
+        $result = $this->db->get('leave_history_view')->result();
         return json_decode(json_encode($result), 1);
     }
 
@@ -60,6 +60,11 @@ class Staff_model extends CI_Model {
         return $leavehistory + $staff;
     }
 
+    public function getYearlyLeaveData($staffid, $year){
+        $this->db->where(array('staff_id' => $staffid, 'year' => $year));
+        return $this->db->get('yearly_leave_data')->row();
+    }
+
     /*
      * Insert
      */
@@ -81,16 +86,27 @@ class Staff_model extends CI_Model {
         return $this->db->insert('staff', $data);
     }
 
-    public function addLeaveHistory($staffid, $userid, $startdate, $enddate, $leavetype){
+    public function addLeaveHistory($staffid, $userid, $startdate, $enddate, $interval, $leavetype){
         $data = array(
             'staff_id' => $staffid,
             'user_id' => $userid,
             'start_date' => $startdate,
             'end_date' => $enddate,
+            'day_interval' => $interval,
             'leave_type' => $leavetype,
             'registration_date' => time()
         );
+        $this->yearlyDataTrigger($staffid, date('Y', strtotime($startdate)));
         return $this->db->insert('leave_history', $data);
+    }
+
+    public function addYearlyLeaveData($staffid, $year, $claim){
+        $data = array(
+            'staff_id' => $staffid,
+            'year' => $year,
+            'claim' => $claim
+        );
+        return $this->db->insert('yearly_leave_data', $data);
     }
 
 
@@ -117,6 +133,28 @@ class Staff_model extends CI_Model {
         $this->db->set('active', $status);
         $this->db->where('id', $id);
         return $this->db->update('staff');
+    }
+
+
+    /*
+     * Custom
+     */
+
+    public function yearlyDataTrigger($staffid, $year){
+
+        $yearlydata = $this->getYearlyLeaveData($staffid, $year);
+
+        if(!$yearlydata){
+            $staff = $this->isStaff($staffid);
+            if($staff->ten_year === NULL){ // İşçi
+                $this->addYearlyLeaveData($staffid, $year, 16);
+            }elseif((int) $staff->ten_year === 0){ //Normal
+                $this->addYearlyLeaveData($staffid, $year, 20);
+            }elseif((int) $staff->ten_year === 1){ //10+
+                $this->addYearlyLeaveData($staffid, $year, 30);
+            }
+        }
+
     }
 
 }

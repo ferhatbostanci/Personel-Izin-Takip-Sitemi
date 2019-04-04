@@ -1,8 +1,8 @@
 /*
- * View 'detail_leave_history'
+ * View 'leave_history_view'
  */
 
-SELECT leave_history.id, leave_history.start_date, leave_history.end_date, leave_history.registration_date,
+SELECT leave_history.id, leave_history.start_date, leave_history.end_date, leave_history.day_interval, leave_history.registration_date,
        leave_types.name AS typename,
        CONCAT(staff.name, ' ', staff.surname) AS staffname,
        CONCAT(users.name, ' ', users.surname) AS recordby

@@ -167,9 +167,15 @@ class Staff extends CI_Controller{
 
     }
 
+
+    /*
+     * POST Request
+     */
+
     public function change(){
 
         if(!$this->input->post()) show_404();
+        if($this->input->post('status') > 1 || $this->input->post('status') < 0) show_404();
 
         echo $this->staff_model->changeStaffActive($this->input->post('id'), $this->input->post('status'));
 

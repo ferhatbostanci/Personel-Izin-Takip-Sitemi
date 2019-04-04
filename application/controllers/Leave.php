@@ -29,7 +29,8 @@ class Leave extends CI_Controller{
             'jsload' => array(
                 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
                 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js',
-                'plugins/select2/js/select2.full.min.js'
+                'plugins/select2/js/select2.full.min.js',
+                'plugins/bootstrap-notify/bootstrap-notify.min.js'
             )
         );
         $this->load->view('leave/add', $data);
@@ -115,7 +116,13 @@ class Leave extends CI_Controller{
             $startdate = date("Y-m-d", strtotime($startdate));
             $enddate = date("Y-m-d", strtotime($enddate));
 
-            $this->staff_model->addLeaveHistory($this->input->post('staffid'), $this->session->userdata('user_id'), $startdate, $enddate, $this->input->post('leavetype'));
+            // Day interval
+            $datetime1 = date_create($startdate);
+            $datetime2 = date_create($enddate);
+            $interval = date_diff($datetime1, $datetime2);
+            $interval = $interval->format('%a')+1;
+
+            $this->staff_model->addLeaveHistory($this->input->post('staffid'), $this->session->userdata('user_id'), $startdate, $enddate, $interval, $this->input->post('leavetype'));
 
             $this->session->set_flashdata('add_message',
                 array(
