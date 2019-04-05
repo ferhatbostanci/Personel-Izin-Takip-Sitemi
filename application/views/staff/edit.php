@@ -38,7 +38,7 @@
                                 <input type="text" name="id"  value="<?= isset($staff->id) ? $staff->id : set_value('id') ?>" hidden>
                                     <div class="form-group">
                                         <label for="name">Ad</label>
-                                        <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" >
+                                        <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" required>
                                         <span class="invalid-feedback" style="display: unset;">
                                             <?= form_error('name') ?>
                                         </span>
