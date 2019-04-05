@@ -38,7 +38,7 @@
                                 <input type="text" name="id"  value="<?= isset($staff->id) ? $staff->id : set_value('id') ?>" hidden>
                                     <div class="form-group">
                                         <label for="name">Ad</label>
-                                        <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" required>
+                                        <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" >
                                         <span class="invalid-feedback" style="display: unset;">
                                             <?= form_error('name') ?>
                                         </span>
@@ -61,7 +61,7 @@
                                     <div class="form-group" id="tenyear-div" <?= isset($staff->title) || set_value('title') ? '' : 'hidden' ?>>
                                         <label for="surname">Görev süresi 10 yılı geçmiş mi?</label>
                                         <div class="custom-control custom-checkbox custom-control-light custom-control-lg mb-1">
-                                            <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= isset($staff->ten_year) ? ($staff->ten_year && set_value('title') ? 'checked' : '') : (set_value('tenyear') && set_value('title') ? 'checked' : '') ?>>
+                                            <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= isset($staff->ten_year) ? ($staff->ten_year ? 'checked' : '') : (set_value('tenyear') && set_value('title') ? 'checked' : '') ?>>
                                             <label class="custom-control-label" for="tenyear">Evet</label>
                                         </div>
                                     </div>
