@@ -57,10 +57,10 @@
                                                 <?= form_error('title') ?>
                                             </span>
                                         </div>
-                                        <div class="form-group" id="tenyear-div" hidden>
+                                        <div class="form-group" id="tenyear-div" <?= set_value('title') ? '' : 'hidden' ?>>
                                             <label>Görev süresi 10 yılı geçmiş mi?</label>
                                             <div class="custom-control custom-checkbox custom-control-light custom-control-lg mb-1">
-                                                <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= set_value('tenyear') ? 'checked' : '' ?>>
+                                                <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= set_value('tenyear') && set_value('title')  ? 'checked' : '' ?>>
                                                 <label class="custom-control-label" for="tenyear">Evet</label>
                                             </div>
                                             <span class="invalid-feedback" style="display: unset;">

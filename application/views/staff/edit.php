@@ -38,7 +38,7 @@
                                 <input type="text" name="id"  value="<?= isset($staff->id) ? $staff->id : set_value('id') ?>" hidden>
                                     <div class="form-group">
                                         <label for="name">Ad</label>
-                                        <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" required>
+                                        <input type="text" class="form-control <?= form_error('name') ? 'is-invalid' : '' ?>" name="name" placeholder="Personelin Adı" value="<?= isset($staff->name) ? $staff->name : set_value('name') ?>" maxlength="50" >
                                         <span class="invalid-feedback" style="display: unset;">
                                             <?= form_error('name') ?>
                                         </span>
@@ -53,21 +53,17 @@
                                     <div class="form-group">
                                         <label for="title">Ünvan</label>
                                         <span class="badge badge-info">İşçi ise boş bırakın</span>
-                                        <input type="text" class="form-control <?= form_error('title') ? 'is-invalid' : '' ?>" name="title" placeholder="Personelin Ünvanı" value="<?= isset($staff->title) ? $staff->title : set_value('title') ?>" maxlength="50">
+                                        <input type="text" class="form-control <?= form_error('title') ? 'is-invalid' : '' ?>" name="title" placeholder="Personelin Ünvanı" onkeyup="changeTitle(this)" value="<?= isset($staff->title) ? $staff->title : set_value('title') ?>" maxlength="50">
                                         <span class="invalid-feedback" style="display: unset;">
                                             <?= form_error('title') ?>
                                         </span>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="tenyear-div" <?= isset($staff->title) || set_value('title') ? '' : 'hidden' ?>>
                                         <label for="surname">Görev süresi 10 yılı geçmiş mi?</label>
-                                        <span class="badge badge-info">Çalışan ise kullanın</span>
                                         <div class="custom-control custom-checkbox custom-control-light custom-control-lg mb-1">
-                                            <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= $staff->ten_year ? 'checked' : '' ?>>
+                                            <input type="checkbox" class="custom-control-input" id="tenyear" name="tenyear" <?= isset($staff->ten_year) ? ($staff->ten_year && set_value('title') ? 'checked' : '') : (set_value('tenyear') && set_value('title') ? 'checked' : '') ?>>
                                             <label class="custom-control-label" for="tenyear">Evet</label>
                                         </div>
-                                        <span class="invalid-feedback" style="display: unset;">
-                                                    <?= form_error('surname') ?>
-                                                </span>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success mr-1 mb-3">
@@ -95,5 +91,19 @@
 
     </div>
     <!-- END Page Container -->
+
+    <script src="<?= base_url('assets/js/plugins/jquery/jquery.slim.min.js') ?>"></script>
+
+    <script>
+        function changeTitle(data) {
+            var tenyear = document.getElementById("tenyear-div");
+            console.log(data.value);
+            if(data.value == ''){
+                tenyear.hidden = true;
+            }else{
+                tenyear.hidden = false;
+            }
+        }
+    </script>
 
 <?php $this->load->view('include/footer'); ?>
