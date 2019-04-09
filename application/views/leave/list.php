@@ -41,8 +41,8 @@
                             <thead>
                             <tr>
                                 <th class="text-center" style="width: 5%;">#</th>
-                                <th style="width: 30%;">AD-SOYAD</th>
-                                <th style="width: 25%;">KAYDEDEN PERSONEL</th>
+                                <th style="width: 40;">AD-SOYAD</th>
+                                <th style="width: 15%;">İZİN TÜRÜ</th>
                                 <th style="width: 15%;">BAŞLANGIÇ</th>
                                 <th style="width: 15%;">BİTİŞ</th>
                                 <th style="width: 10%;">Süre</th>
@@ -54,9 +54,9 @@
                                     <td class="text-center font-size-sm"><?= $i ?></td>
                                     <td class="font-w600 font-size-sm">
                                         <?= $history['staffname'] ?>
-                                        <span class="badge badge-danger"><?= time() > strtotime($history['end_date']) ? 'Bitti' : '' ?></span>
+                                        <span class="badge badge-danger"><?= time() > strtotime($history['end_date']) ? 'Bitmiş' : '' ?></span>
                                     </td>
-                                    <td class="font-w500 font-size-sm"><?= $history['recordby'] ?></td>
+                                    <td class="font-w500 font-size-sm"><?= $history['typename'] ?></td>
                                     <td>
                                         <em class="text-muted font-size-sm"><?= date('d/m/Y', strtotime($history['start_date'])) ?></em>
                                     </td>

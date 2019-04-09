@@ -153,7 +153,10 @@ class Users extends CI_Controller {
 
         }
 
-        $data = ['title' => 'Giriş Yap'];
+        $data = [
+            'title' => 'Giriş Yap',
+            'registrationOn' => $this->registrationOn
+        ];
         $this->load->view('users/login', $data);
 
     }
