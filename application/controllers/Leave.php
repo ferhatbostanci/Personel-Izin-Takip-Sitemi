@@ -9,6 +9,7 @@ class Leave extends CI_Controller{
 
         $this->load->library('form_validation');
         $this->load->model('staff_model');
+        $this->load->model('leave_model');
 
         if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
         if($this->session->userdata('lock')) redirect('users/lock');
@@ -152,6 +153,11 @@ class Leave extends CI_Controller{
             $this->load->view('leave/add', $data);
         }
 
+    }
+
+    public function delete_leave_history(){
+        $id = $this->input->input_stream('id');
+        $this->leave_model->deleteLeaveHistory($id);
     }
 
 

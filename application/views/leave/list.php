@@ -41,11 +41,12 @@
                             <thead>
                             <tr>
                                 <th class="text-center" style="width: 5%;">#</th>
-                                <th style="width: 40;">AD-SOYAD</th>
+                                <th style="width: 35;">AD-SOYAD</th>
                                 <th style="width: 15%;">İZİN TÜRÜ</th>
                                 <th style="width: 15%;">BAŞLANGIÇ</th>
                                 <th style="width: 15%;">BİTİŞ</th>
-                                <th style="width: 10%;">Süre</th>
+                                <th style="width: 10%;">SÜRE</th>
+                                <th style="width: 5%;">SİL</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,6 +67,13 @@
                                     <td>
                                         <em class="text-muted font-size-sm"><?= $history['day_interval'] ?> Gün</em>
                                     </td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-dark" onclick="deleteButton(<?= $history['id'] ?>)">
+                                                <i class="fa fa-fw fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -84,5 +92,22 @@
 
     </div>
     <!-- END Page Container -->
+
+    <script src="<?= base_url('assets/js/plugins/jquery/jquery.slim.min.js') ?>"></script>
+
+    <script>
+        function deleteButton(id) {
+            // Ajax POST
+            $.ajax({
+                url: "<?= base_url('leave/list') ?>",
+                method: "DELETE",
+                data: {
+                    id : id
+                }
+            }).done(function(data){
+                location.reload()
+            });
+        }
+    </script>
 
 <?php $this->load->view('include/footer'); ?>

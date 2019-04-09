@@ -62,5 +62,6 @@ $route['staff/add']['post'] = 'staff/add_valid';
 $route['staff/edit']['post'] = 'staff/edit_valid';
 
 $route['leave/add']['post'] = 'leave/add_valid';
+$route['leave/list']['delete'] = 'leave/delete_leave_history';
 
 $route['yearly/add']['post'] = 'yearly/add_valid';
