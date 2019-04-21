@@ -55,7 +55,10 @@
                                     <td class="text-center font-size-sm"><?= $i ?></td>
                                     <td class="font-w600 font-size-sm">
                                         <?= $history['staffname'] ?>
-                                        <span class="badge badge-danger"><?= time() > strtotime($history['end_date']) ? 'Bitmiş' : '' ?></span>
+                                        <span class="badge badge-danger"><?= time() > (strtotime($history['end_date'])+86400) ? 'Bitmiş' : '' ?></span>
+                                        <?php if( time() >= strtotime($history['start_date']) && time() <= (strtotime($history['end_date'])+86400) ): ?>
+                                        <span class="badge badge-success">Devam Ediyor</span>
+                                        <?php endif; ?>
                                     </td>
                                     <td class="font-w500 font-size-sm"><?= $history['typename'] ?></td>
                                     <td>
@@ -65,7 +68,7 @@
                                         <em class="text-muted font-size-sm"><?= date('d/m/Y', strtotime($history['end_date'])) ?></em>
                                     </td>
                                     <td>
-                                        <em class="text-muted font-size-sm"><?= $history['day_interval'] ?> Gün</em>
+                                        <em class="text-muted font-size-sm"><?= getWorkdays($history['start_date'], $history['end_date'], $history['worker']) ?> Gün</em>
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group">

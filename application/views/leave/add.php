@@ -41,7 +41,7 @@
                                 <form action="<?= base_url('leave/add') ?>" method="POST"">
                                     <div class="form-group">
                                         <label for="name">Personel</label>
-                                        <select class="js-select2 form-control" id="staffid" name="staffid" style="width: 100%;" data-placeholder="Personel seç..." autocomplete="off" onchange="changeStaff(this);" required>
+                                        <select class="js-select2 form-control" id="staffid" name="staffid" style="width: 100%;" data-placeholder="Personel seç..." autocomplete="off" required>
                                             <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
                                             <?php foreach($stafflist as $staff): ?>
                                                 <option value="<?= $staff['id'] ?>" <?= set_value('staffid') == $staff['id'] ? 'selected' : '' ?> ><?= $staff['name'] . ' ' . $staff['surname'] ?> (<?= $staff['title'] ? $staff['title'] : 'İşçi'  ?>)</option>
@@ -79,6 +79,12 @@
                                             <?= form_error('leavetype') ?>
                                         </span>
                                     </div>
+                                    <div class="form-group" id="infogroup" hidden>
+                                        <div class="alert alert-info alert-dismissable" role="alert">
+                                            <h3 class="alert-heading font-w300 my-2"><b>Bilgi</b></h3>
+                                            <p class="mb-0" id="info">sa </p>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success" id="sumbitbtn" disabled>Kaydet</button>
                                     </div>
@@ -102,16 +108,25 @@
     <script src="<?= base_url('assets/js/plugins/jquery/jquery.slim.min.js') ?>"></script>
 
     <script>
-        function changeStaff(data) {
-            //var staffcount = document.getElementById("staffcount");
-            //staffcount.innerHTML = "<span class='badge badge-info'>Kalan Yıllık İzin: " +  data.value +"</span>";
-        }
-
         function changeLeaveType(data) {
             var sumbitbtn = document.getElementById("sumbitbtn");
             if(data.value == '0'){
                 sumbitbtn.disabled = true;
+                //document.getElementById("infogroup").hidden = true;
             }else{
+                /*var staffid = document.getElementById("staffid");
+                var info = document.getElementById("info");
+                if(data.value == 1){
+                    var text = '';
+                    text += "Kullanılan İzin: " +  staffid.value;
+                    text += "<br>";
+                    text += "Kalan Yıllık İzin: " +  staffid.value;
+                    info.innerHTML = text;
+                    document.getElementById("infogroup").hidden = false;
+                }else{
+                    document.getElementById("infogroup").hidden = true;
+                }*/
+
                 sumbitbtn.disabled = false;
             }
         }

@@ -57,7 +57,8 @@
                                     <td class="font-w500"><?= $year['year'] ?></td>
                                     <td class="font-w500"><?= $year['claim'] ?> Gün</td>
                                     <td class="font-w500">
-                                        <?= ($interval = $this->staff_model->getStaffTotalInterval($year['staff_id'], $year['year'])->day_interval) ? $interval . ' Gün' : '-' ?>
+                                        <?php $workday = sumWorkDayYearly($year['staff_id'], $year['year'], $year['worker']) ?>
+                                        <?= $workday == 0 ? '-' : $workday.' Gün' ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

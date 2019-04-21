@@ -9,7 +9,7 @@ class Leave extends CI_Controller{
 
         $this->load->library('form_validation');
         $this->load->model('staff_model');
-        $this->load->model('leave_model');
+
 
         if(!$this->session->userdata('logged_in')) redirect(base_url('users/login'));
         if($this->session->userdata('lock')) redirect('users/lock');
@@ -105,25 +105,15 @@ class Leave extends CI_Controller{
 
         if($this->form_validation->run() == TRUE){
 
+            // Edit date
             $startdate = str_replace('/', '-', $this->input->post('startdate'));
             $enddate = str_replace('/', '-', $this->input->post('enddate'));
-
-            // Get work day
-            $startdatework = date("Y/m/d", strtotime($startdate));
-            $enddatework = date("Y/m/d", strtotime($enddate));
-            $workday = getWorkdays($startdatework, $enddatework);
 
             // Convert date
             $startdate = date("Y-m-d", strtotime($startdate));
             $enddate = date("Y-m-d", strtotime($enddate));
 
-            // Day interval
-            $datetime1 = date_create($startdate);
-            $datetime2 = date_create($enddate);
-            $interval = date_diff($datetime1, $datetime2);
-            $interval = $interval->format('%a')+1;
-
-            $this->staff_model->addLeaveHistory($this->input->post('staffid'), $this->session->userdata('user_id'), $startdate, $enddate, $interval, $this->input->post('leavetype'));
+            $this->staff_model->addLeaveHistory($this->input->post('staffid'), $this->session->userdata('user_id'), $startdate, $enddate, $this->input->post('leavetype'));
 
             $this->session->set_flashdata('add_message',
                 array(
@@ -156,6 +146,7 @@ class Leave extends CI_Controller{
     }
 
     public function delete_leave_history(){
+        $this->load->model('leave_model');
         $id = $this->input->input_stream('id');
         $this->leave_model->deleteLeaveHistory($id);
     }

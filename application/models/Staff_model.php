@@ -37,6 +37,14 @@ class Staff_model extends CI_Model {
         return json_decode(json_encode($result), 1);
     }
 
+    public function getDetailLeaveHistoryByIDAndYear($staffid, $year){
+        $this->db->where('staff_id', $staffid);
+        $this->db->where('start_date >=', $year.'-01-01');
+        $this->db->where('end_date <=', $year.'-12-31');
+        $result = $this->db->get('leave_history_view')->result();
+        return json_decode(json_encode($result), 1);
+    }
+
     public function getActiveLeaveHistoryNumber(){
         $this->db->where('end_date >=', date('Y-m-d', time()));
         return $this->db->get('leave_history')->num_rows();
@@ -100,13 +108,12 @@ class Staff_model extends CI_Model {
         return $this->db->insert('staff', $data);
     }
 
-    public function addLeaveHistory($staffid, $userid, $startdate, $enddate, $interval, $leavetype){
+    public function addLeaveHistory($staffid, $userid, $startdate, $enddate, $leavetype){
         $data = array(
             'staff_id' => $staffid,
             'user_id' => $userid,
             'start_date' => $startdate,
             'end_date' => $enddate,
-            'day_interval' => $interval,
             'leave_type' => $leavetype,
             'registration_date' => time()
         );
